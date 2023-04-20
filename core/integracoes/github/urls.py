@@ -1,7 +1,8 @@
-from django.urls import path
+from django.urls import re_path
 
 from core.integracoes.github import views
 
 urlpatterns = [
-    path('commits', views.Commit.as_view(), name='commits')
+    re_path('^repositories$', views.Repositories.as_view(), name='commits'),
+    re_path('^commits$', views.Commit.as_view(), name='commits'),
 ]
