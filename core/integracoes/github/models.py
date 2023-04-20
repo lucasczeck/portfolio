@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import DO_NOTHING
+
 import core.models
 
 
@@ -16,3 +18,4 @@ class Commits(core.models.Log):
     message = models.TextField(null=True)
     url = models.URLField(null=True)
     parents_sha = models.CharField(max_length=200, null=True)
+    repository = models.ForeignKey('Repositories', on_delete=DO_NOTHING, null=True)
