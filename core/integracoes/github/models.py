@@ -13,9 +13,9 @@ class Repositories(core.models.Log):
 
 
 class Commits(core.models.Log):
-    sha = models.CharField(max_length=200, null=True)
+    sha = models.CharField(max_length=200, primary_key=True)
     date = models.DateTimeField(null=True)
     message = models.TextField(null=True)
     url = models.URLField(null=True)
-    parents_sha = models.CharField(max_length=200, null=True)
+    parents = models.ForeignKey('Commits', on_delete=DO_NOTHING, null=True)
     repository = models.ForeignKey('Repositories', on_delete=DO_NOTHING, null=True)
