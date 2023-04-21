@@ -56,7 +56,7 @@ class Log(DatLog):
 
         super(Log, self).save(*args, **kwargs)
 
-    def desabilitar(self, *args, **kwargs):
+    def disable(self, *args, **kwargs):
         self.status = False
         self.dat_delete = timezone.now()
         super(Log, self).save(*args, **kwargs)

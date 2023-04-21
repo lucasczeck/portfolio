@@ -28,17 +28,11 @@ class Commit:
 
     @staticmethod
     def create_commit(data, repository_id):
-        parent = None
-        parent_sha = data.get('parents')[0].get('sha') if data.get('parents') else None
-        if parent_sha:
-            parent = Commits.objects.filter(sha=parent_sha).first()
-
         commit = Commits()
         commit.sha = data.get('sha')
         commit.date = data.get('commit').get('committer').get('date')
         commit.message = data.get('commit').get('message')
         commit.url = data.get('url')
-        commit.parents = parent
         commit.repository_id = repository_id
         commit.save()
 

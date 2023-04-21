@@ -10,6 +10,10 @@ class Repositories(core.models.Log):
     commits_url = models.URLField(null=True)
     created_date = models.DateTimeField(null=True)
     pushed_date = models.DateTimeField(null=True)
+    is_finished = models.BooleanField(null=True)
+    is_professional = models.BooleanField(null=True)
+    title = models.CharField(max_length=200, null=True)
+    is_approved = models.BooleanField(default=False)
 
 
 class Commits(core.models.Log):
@@ -17,5 +21,4 @@ class Commits(core.models.Log):
     date = models.DateTimeField(null=True)
     message = models.TextField(null=True)
     url = models.URLField(null=True)
-    parents = models.ForeignKey('Commits', on_delete=DO_NOTHING, null=True)
     repository = models.ForeignKey('Repositories', on_delete=DO_NOTHING, null=True)
