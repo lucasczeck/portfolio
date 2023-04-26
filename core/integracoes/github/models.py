@@ -14,6 +14,7 @@ class Repositories(core.models.Log):
     is_professional = models.BooleanField(null=True)
     title = models.CharField(max_length=200, null=True)
     is_approved = models.BooleanField(default=False)
+    is_published = models.BooleanField(null=True)
 
 
 class Commits(core.models.Log):
