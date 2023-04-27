@@ -1,11 +1,13 @@
 from core.integracoes.github.models import Repositories, Commits
+from BO.utils.Date import Date
 
 
 class Cards:
 
-    def __init__(self, date):
-        self.date = date
+    def __init__(self):
         self.cards_projects = None
+        self.dates = None
+        self.card_commits = None
         self.load()
 
     @staticmethod
@@ -23,8 +25,28 @@ class Cards:
 
         return cards
 
+    @staticmethod
+    def load_percentages_commits(stats):
+        today_percentage = ((stats['today'] - stats['yesterday']) / stats['yesterday']) * 100 \
+            if stats['yesterday'] > 0 else 100
+        week_percentage = ((stats['week'] - stats['last_week']) / stats['last_week']) * 100 \
+            if stats['last_week'] > 0 else 100
+        month_percentage = ((stats['month'] - stats['last_month']) / stats['last_month']) * 100 \
+            if stats['last_month'] > 0 else 100
+        year_percentage = ((stats['year'] - stats['last_year']) / stats['last_year']) * 100 \
+            if stats['last_year'] > 0 else 100
+
+        stats['today_percentage'] = float(f"{today_percentage:.2f}")
+        stats['week_percentage'] = float(f"{week_percentage:.2f}")
+        stats['month_percentage'] = float(f"{month_percentage:.2f}")
+        stats['year_percentage'] = float(f"{year_percentage:.2f}")
+
+        return stats
+
     def load(self):
         self.cards_projects = self.get_cards_projects()
+        self.dates = Date().get_dates_card_commits()
+        self.card_commits = self.get_card_commits()
 
     def get_cards_projects(self):
         personal_projects = Repositories.objects.filter(is_professional=False)
@@ -47,9 +69,35 @@ class Cards:
 
         return cards
 
+    def get_card_commits(self):
+        commits = Commits.objects.all()
+
+        data_commits = {
+            'today': commits.filter(date__date=self.dates['today']).count(),
+            'yesterday': commits.filter(date__date=self.dates['yesterday']).count(),
+            'week': commits.filter(date__date__gte=self.dates['first_day_week'],
+                                   date__date__lte=self.dates['last_day_week']).count(),
+            'last_week': commits.filter(date__date__gte=self.dates['first_day_last_week'],
+                                        date__date__lte=self.dates['last_day_last_week']).count(),
+            'month': commits.filter(date__date__gte=self.dates['first_day_month'],
+                                    date__date__lte=self.dates['last_day_month']).count(),
+            'last_month': commits.filter(date__date__gte=self.dates['first_day_last_month'],
+                                         date__date__lte=self.dates['last_day_last_month']).count(),
+            'year': commits.filter(date__date__gte=self.dates['first_day_year'],
+                                   date__date__lte=self.dates['last_day_year']).count(),
+            'last_year': commits.filter(date__date__gte=self.dates['first_day_last_year'],
+                                        date__date__lte=self.dates['last_day_last_year']).count(),
+        }
+
+        card = self.load_percentages_commits(data_commits)
+
+        return card
+
     def get_cards(self):
+
         cards = {
-            'projects': self.cards_projects
+            'projects': self.cards_projects,
+            'commits': self.card_commits
         }
 
         return cards
