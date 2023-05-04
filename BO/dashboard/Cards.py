@@ -21,20 +21,20 @@ class Cards:
             for statistic in card_dict:
                 percentage = (card_dict.get(statistic).get('value') / total * 100) \
                     if card_dict.get(statistic).get('value') and total > 0 else 0
-                card_dict[statistic]['percentage'] = f"{percentage:.2f}"
+                card_dict[statistic]['percentage'] = float(f"{percentage:.2f}")
 
         return cards
 
     @staticmethod
     def load_percentages_commits(stats):
         today_percentage = ((stats['today'] - stats['yesterday']) / stats['yesterday']) * 100 \
-            if stats['yesterday'] > 0 else 100
+            if stats['yesterday'] > 0 else 100 if stats['today'] > 0 else 0
         week_percentage = ((stats['week'] - stats['last_week']) / stats['last_week']) * 100 \
-            if stats['last_week'] > 0 else 100
+            if stats['last_week'] > 0 else 100 if stats['week'] > 0 else 0
         month_percentage = ((stats['month'] - stats['last_month']) / stats['last_month']) * 100 \
-            if stats['last_month'] > 0 else 100
+            if stats['last_month'] > 0 else 100 if stats['month'] > 0 else 0
         year_percentage = ((stats['year'] - stats['last_year']) / stats['last_year']) * 100 \
-            if stats['last_year'] > 0 else 100
+            if stats['last_year'] > 0 else 100 if stats['year'] > 0 else 0
 
         stats['today_percentage'] = float(f"{today_percentage:.2f}")
         stats['week_percentage'] = float(f"{week_percentage:.2f}")
