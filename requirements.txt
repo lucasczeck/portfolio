@@ -4,6 +4,7 @@ certifi==2022.12.7
 charset-normalizer==3.1.0
 dj-static==0.0.6
 Django==4.2
+django-cors-headers==3.14.0
 django-crontab==0.7.1
 django-stdimage==6.0.1
 djangorestframework==3.14.0
