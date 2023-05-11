@@ -19,7 +19,9 @@ class Summary:
         for parent_skill in self.parents_hard_skills:
             skills = list(HardSkills.objects.filter(parent_skill=parent_skill.pk)
                           .values('descriptive_name', 'description'))
-            a = {parent_skill.descriptive_name: {'description': parent_skill.description, 'skills': skills}}
+            a = {parent_skill.descriptive_name: {'descriptive_name': parent_skill.descriptive_name,
+                                                 'description': parent_skill.description,
+                                                 'subskills': skills}}
 
             list_hardskills.append(a)
 
@@ -44,7 +46,7 @@ class Summary:
 
     def get_summary(self):
         summary = {
-            'photo': self.personal_infos.photo,
+            'photo': self.personal_infos.photo.url if self.personal_infos.photo else None,
             'title': self.personal_infos.title,
             'hardskills': self.load_hardskills(),
             'softskills': self.load_softskills(),
