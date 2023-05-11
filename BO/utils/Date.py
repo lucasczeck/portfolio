@@ -12,7 +12,7 @@ class Date:
         return local_dt.date()
 
     def get_today_date(self):
-        today = self.get_today_date()
+        today = self.get_local_date()
 
         return today
 
