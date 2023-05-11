@@ -1,23 +1,28 @@
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
+
+import pytz
 
 
 class Date:
 
     @staticmethod
-    def get_today_date():
-        today = date.today()
+    def get_local_date():
+        tz = pytz.timezone('America/Sao_Paulo')
+        local_dt = datetime.now(tz)
+        return local_dt.date()
+
+    def get_today_date(self):
+        today = self.get_today_date()
 
         return today
 
-    @staticmethod
-    def get_yesterday_date():
-        yesterday = date.today() - timedelta(days=1)
+    def get_yesterday_date(self):
+        yesterday = self.get_today_date() - timedelta(days=1)
 
         return yesterday
 
-    @staticmethod
-    def get_week_dates():
-        today = date.today()
+    def get_week_dates(self):
+        today = self.get_today_date()
         weekday = today.weekday()
 
         first_day_week = today - timedelta(days=weekday + 1)
@@ -25,9 +30,8 @@ class Date:
 
         return first_day_week, last_day_week
 
-    @staticmethod
-    def get_last_week_dates():
-        today = date.today()
+    def get_last_week_dates(self):
+        today = self.get_today_date()
         weekday = today.weekday()
 
         first_day_last_week = today - timedelta(days=weekday+8)
@@ -35,9 +39,8 @@ class Date:
 
         return first_day_last_week, last_day_last_week
 
-    @staticmethod
-    def get_month_dates():
-        today = date.today()
+    def get_month_dates(self):
+        today = self.get_today_date()
         year = today.year
         month = today.month
         last_day_month = 31
@@ -51,9 +54,8 @@ class Date:
 
         return first_day_month, last_day_month
 
-    @staticmethod
-    def get_last_month_dates():
-        today = date.today()
+    def get_last_month_dates(self):
+        today = self.get_today_date()
         last_month = today.replace(day=1) - timedelta(days=1)
         year = last_month.year
         month = last_month.month
@@ -69,9 +71,8 @@ class Date:
 
         return first_day_last_month, last_day_last_month
 
-    @staticmethod
-    def get_year_dates():
-        today = date.today()
+    def get_year_dates(self):
+        today = self.get_today_date()
         year = today.year
 
         first_day_year = date(year, 1, 1)
@@ -79,9 +80,8 @@ class Date:
 
         return first_day_year, last_day_year
 
-    @staticmethod
-    def get_last_year_dates():
-        today = date.today()
+    def get_last_year_dates(self):
+        today = self.get_today_date()
         last_year = today.replace(day=1, month=1) - timedelta(days=1)
         year = last_year.year
 
@@ -118,4 +118,3 @@ class Date:
         }
 
         return dates
-
