@@ -32,7 +32,9 @@ class Summary:
         for parent_skill in self.parents_soft_skills:
             skills = list(SoftSkill.objects.filter(parent_skill=parent_skill.pk)
                           .values('descriptive_name', 'description'))
-            a = {'description': parent_skill.description, 'skills': skills}
+            a = {'descriptive_name': parent_skill.descriptive_name,
+                 'description': parent_skill.description,
+                 'skills': skills}
 
             list_softskills.append(a)
 
