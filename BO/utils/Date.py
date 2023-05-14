@@ -38,7 +38,11 @@ class Date:
         today = self.get_today_date()
         weekday = today.weekday()
 
-        first_day_last_week = today - timedelta(days=weekday+8)
+        if weekday == 6:
+            first_day_last_week = today - timedelta(days=weekday + 1)
+        else:
+            first_day_last_week = today - timedelta(days=weekday+8)
+
         last_day_last_week = first_day_last_week + timedelta(days=6)
 
         return first_day_last_week, last_day_last_week
