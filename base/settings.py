@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'core.integracoes',
     'core.integracoes.github',
     'dashboard',
+    'aboutme',
 ]
 
 MIDDLEWARE = [
