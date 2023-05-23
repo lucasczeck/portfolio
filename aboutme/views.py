@@ -1,3 +1,11 @@
-from django.shortcuts import render
+from django.http import JsonResponse
+from rest_framework.views import APIView
 
-# Create your views here.
+import BO.aboutme.Personal
+
+
+class GetPersonalInfos(APIView):
+    def get(self, *args, **kwargs):
+        personal_infos = BO.aboutme.Personal.PersonalInfos().get_personal_infos()
+
+        return JsonResponse(personal_infos, safe=False)
