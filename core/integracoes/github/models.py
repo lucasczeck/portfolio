@@ -15,6 +15,8 @@ class Repositories(core.models.Log):
     title = models.CharField(max_length=200, null=True)
     is_approved = models.BooleanField(default=False)
     is_published = models.BooleanField(null=True)
+    repository_url = models.URLField(null=True)
+    project_url = models.URLField(null=True)
 
 
 class Commits(core.models.Log):
