@@ -11,8 +11,13 @@ class Commit:
 
     @staticmethod
     def get_repository_commits(url):
+        data = []
         response = requests.get(url)
-        data = response.json()
+        commits = response.json()
+
+        for commit in commits:
+            if 'Merge branch' not in commit['commit']['message']:
+                data.append(commit)
 
         return data
 
