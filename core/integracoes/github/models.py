@@ -10,7 +10,8 @@ class Repositories(core.models.Log):
     commits_url = models.URLField(null=True)
     created_date = models.DateTimeField(null=True)
     pushed_date = models.DateTimeField(null=True)
-    is_project_created = models.BooleanField(null=True)
+    is_project_created = models.BooleanField(null=True, default=False)
+    repository_url = models.URLField(null=True)
 
 
 class Commits(core.models.Log):

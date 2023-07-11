@@ -96,6 +96,7 @@ class Repository:
         repository.commits_url = data.get('commits_url').split('{')[0]
         repository.created_date = data.get('created_at')
         repository.pushed_date = data.get('pushed_at')
+        repository.repository_url = data.get('html_url')
         repository.save()
 
         return True, repository, is_created

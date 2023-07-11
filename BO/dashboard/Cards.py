@@ -1,4 +1,5 @@
-from core.integracoes.github.models import Repositories, Commits
+from core.integracoes.github.models import Commits
+from projects.models import Projects
 from BO.utils.Date import Date
 
 
@@ -49,8 +50,8 @@ class Cards:
         self.card_commits = self.get_card_commits()
 
     def get_cards_projects(self):
-        personal_projects = Repositories.objects.filter(is_professional=False)
-        professional_projects = Repositories.objects.filter(is_professional=True)
+        personal_projects = Projects.objects.filter(is_professional=False)
+        professional_projects = Projects.objects.filter(is_professional=True)
 
         data_projects = {
             'personal': {
