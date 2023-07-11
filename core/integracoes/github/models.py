@@ -10,14 +10,7 @@ class Repositories(core.models.Log):
     commits_url = models.URLField(null=True)
     created_date = models.DateTimeField(null=True)
     pushed_date = models.DateTimeField(null=True)
-    is_finished = models.BooleanField(null=True)
-    is_professional = models.BooleanField(null=True)
-    title = models.CharField(max_length=200, null=True)
-    is_approved = models.BooleanField(default=False)
-    is_published = models.BooleanField(null=True)
-    repository_url = models.URLField(null=True)
-    project_url = models.URLField(null=True)
-    description = models.TextField(null=True)
+    is_project_created = models.BooleanField(null=True)
 
 
 class Commits(core.models.Log):
