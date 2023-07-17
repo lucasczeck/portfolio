@@ -60,3 +60,11 @@ class Log(DatLog):
         self.status = False
         self.dat_delete = timezone.now()
         super(Log, self).save(*args, **kwargs)
+
+
+class LogError(models.Model):
+    nm_function = models.CharField(null=True, max_length=200)
+    nm_class = models.CharField(null=True, max_length=200)
+    nm_file = models.CharField(null=True, max_length=200)
+    line = models.IntegerField(null=True)
+    mensage = models.TextField(null=True)

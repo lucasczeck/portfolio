@@ -1,3 +1,4 @@
+from BO.core.Log import Error
 from projects.models import Projects
 
 
@@ -32,11 +33,11 @@ class Project:
 
             status = True
 
-        except:
+        except Exception as e:
+            Error.save_error(e)
             status = False
 
-        finally:
-            return status
+        return status
 
     def edit_project(self, title=None, description=None, is_finished=None, is_professional=None,
                      is_approved=None, is_published=None, project_url=None):
@@ -54,11 +55,11 @@ class Project:
 
             status = True
 
-        except:
+        except Exception as e:
+            Error.save_error(e)
             status = False
 
-        finally:
-            return status
+        return status
 
     @staticmethod
     def get_all_projects():
