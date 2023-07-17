@@ -34,6 +34,29 @@ class ProjectView(APIView):
 
     def post(self, *args, **kwargs):
         project_id = self.request.POST.get('project_id')
+        repository_id = self.request.POST.get('repository_id')
+        title = self.request.POST.get('title')
+        description = self.request.POST.get('description')
+        is_finished = self.request.POST.get('is_finished')
+        is_professional = self.request.POST.get('is_professional')
+        is_approved = self.request.POST.get('is_approved')
+        is_published = self.request.POST.get('is_published')
+        project_url = self.request.POST.get('project_url')
 
-        project = Project(id=project_id).save_project()
+        parametros = {'title': title, 'description': description, 'is_finished': is_finished,
+                      'is_professional': is_professional, 'is_approved': is_approved, 'is_published': is_published,
+                      'project_url': project_url}
 
+        project = Project(id=project_id)
+
+        if project_id:
+            status = project.edit_project(**parametros)
+        else:
+            status = project.save_project(**parametros, repository=repository_id)
+
+        if status:
+            response = {'status': True, 'msg': ''}
+        else:
+            response = {'status': True, 'msg': 'Ocorreu um erro ao salvar o projeto'}
+
+        return JsonResponse(response, safe=False)

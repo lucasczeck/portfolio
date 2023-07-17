@@ -14,20 +14,51 @@ class Project:
         else:
             return {'status': True, 'project': project, 'msg': ''}
 
-    def save_project(self, title=None, description=None, is_finished=None, is_professional=None, is_approved=None,
-                     is_published=None, project_url=None, repository=None):
+    @staticmethod
+    def save_project(title=None, description=None, is_finished=None, is_professional=None,
+                     is_approved=None, is_published=None, project_url=None, repository=None):
 
-        project = Projects.objects.filter(id=self.id).first() if self.id else Projects()
-        project.title = title
-        project.description = description
-        project.is_finished = is_finished
-        project.is_professional = is_professional
-        project.is_approved = is_approved
-        project.is_published = is_published
-        project.project_url = project_url
-        if not self.id:
+        try:
+            project = Projects()
+            project.title = title
+            project.description = description
+            project.is_finished = is_finished
+            project.is_professional = is_professional
+            project.is_approved = is_approved
+            project.is_published = is_published
+            project.project_url = project_url
             project.repository_id = repository
-        project.save()
+            project.save()
+
+            status = True
+
+        except:
+            status = False
+
+        finally:
+            return status
+
+    def edit_project(self, title=None, description=None, is_finished=None, is_professional=None,
+                     is_approved=None, is_published=None, project_url=None):
+
+        try:
+            project = Projects.objects.filter(id=self.id).first()
+            project.title = title
+            project.description = description
+            project.is_finished = is_finished
+            project.is_professional = is_professional
+            project.is_approved = is_approved
+            project.is_published = is_published
+            project.project_url = project_url
+            project.save()
+
+            status = True
+
+        except:
+            status = False
+
+        finally:
+            return status
 
     @staticmethod
     def get_all_projects():
