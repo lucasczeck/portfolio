@@ -54,9 +54,6 @@ class ProjectView(APIView):
         else:
             status = project.save_project(**parametros, repository=repository_id)
 
-        if status:
-            response = {'status': True, 'msg': ''}
-        else:
-            response = {'status': True, 'msg': 'Ocorreu um erro ao salvar o projeto'}
+        response = {'status': status, 'msg': '' if status else 'Ocorreu um erro ao salvar o projeto'}
 
         return JsonResponse(response, safe=False)
