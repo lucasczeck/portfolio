@@ -31,13 +31,13 @@ class Project:
             project.repository_id = repository
             project.save()
 
-            status = True
+            response = {'status': True, 'msg': ''}
 
         except Exception as e:
             Error.save_error(e)
-            status = False
+            response = {'status': False, 'msg': 'Ocorreu um erro ao salvar o projeto'}
 
-        return status
+        return response
 
     def edit_project(self, title=None, description=None, is_finished=None, is_professional=None,
                      is_approved=None, is_published=None, project_url=None):
@@ -53,13 +53,13 @@ class Project:
             project.project_url = project_url
             project.save()
 
-            status = True
+            response = {'status': True, 'msg': ''}
 
         except Exception as e:
             Error.save_error(e)
-            status = False
+            response = {'status': False, 'msg': 'Ocorreu um erro ao salvar o projeto'}
 
-        return status
+        return response
 
     @staticmethod
     def get_all_projects():

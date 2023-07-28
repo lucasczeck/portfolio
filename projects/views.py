@@ -50,10 +50,8 @@ class ProjectView(APIView):
         project = Project(id=project_id)
 
         if project_id:
-            status = project.edit_project(**parametros)
+            response = project.edit_project(**parametros)
         else:
-            status = project.save_project(**parametros, repository=repository_id)
-
-        response = {'status': status, 'msg': '' if status else 'Ocorreu um erro ao salvar o projeto'}
+            response = project.save_project(**parametros, repository=repository_id)
 
         return JsonResponse(response, safe=False)

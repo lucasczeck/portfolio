@@ -62,9 +62,9 @@ class Log(DatLog):
         super(Log, self).save(*args, **kwargs)
 
 
-class LogError(models.Model):
+class LogError(Log):
     nm_function = models.CharField(null=True, max_length=200)
     nm_class = models.CharField(null=True, max_length=200)
     nm_file = models.CharField(null=True, max_length=200)
     line = models.IntegerField(null=True)
-    mensage = models.TextField(null=True)
+    message = models.TextField(null=True)
