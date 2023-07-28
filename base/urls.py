@@ -25,7 +25,8 @@ urlpatterns = [
     path('', include('core.urls')),
     path('dashboard/', include('dashboard.urls')),
     path('aboutme/', include('aboutme.urls')),
-    path('projects/', include('projects.urls'))
+    path('projects/', include('projects.urls')),
+    path('contact/', include('contact.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # crontab.add_default_jobs()
