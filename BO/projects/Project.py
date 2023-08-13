@@ -1,3 +1,5 @@
+from django.db.models import F
+
 from BO.core.Log import Error
 from projects.models import Projects
 
@@ -64,5 +66,12 @@ class Project:
     @staticmethod
     def get_all_projects():
         projects = Projects.objects.active().filter(is_approved=True).values().all()
+
+        return list(projects)
+
+    @staticmethod
+    def get_list_project():
+        projects = Projects.objects.active().values('id').annotate(url=F('project_url'), name=F('title'),
+                                                                   status=F('is_published'))
 
         return list(projects)

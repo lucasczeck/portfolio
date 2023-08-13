@@ -55,3 +55,12 @@ class ProjectView(APIView):
             response = project.save_project(**parametros, repository=repository_id)
 
         return JsonResponse(response, safe=False)
+
+
+class ListProjectView(APIView):
+
+    @staticmethod
+    def get(*args, **kwargs):
+        project = Project.get_list_project()
+
+        return JsonResponse(project, safe=False)
