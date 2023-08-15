@@ -34,7 +34,6 @@ CORS_ALLOWED_ORIGINS = ['http://localhost:4200', 'https://lucasczeck.netlify.app
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -43,6 +42,7 @@ INSTALLED_APPS = [
     'django_crontab',
 
     'core',
+    'core.admin',
     'core.integracoes',
     'core.integracoes.github',
     'dashboard',

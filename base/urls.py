@@ -21,7 +21,6 @@ from django.conf import settings
 # from django_crontab import crontab
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', include('core.urls')),
     path('dashboard/', include('dashboard.urls')),
     path('aboutme/', include('aboutme.urls')),
